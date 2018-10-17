@@ -77,3 +77,26 @@ unsigned int height(dico d) {
     }
     return max;
 }
+
+
+
+void print_prefix(dico d) {
+    print_prefix_decale(d , 0);
+}
+
+void print_prefix(dico d , unsigned int decalage) {
+
+    for (unsigned int k = 0 ; k < NB_KEYS ; k++) {
+        if (d[k] != NULL) {
+            for (unsigned p = 0 ; p < decalage ; p++) {
+                printf("+");
+            }
+            printf("[%s]%s", d[k]->first , d[k]->first);
+            if (end_of_word) {
+                printf("*");
+            }
+            printf("\n");
+            nb_nodes_tree(&d[k] , decalage + 1);
+        }
+    }
+}

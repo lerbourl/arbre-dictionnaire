@@ -22,4 +22,7 @@ unsigned int nb_children(tree t);
 unsigned int nb_nodes(dico d);
 unsigned int height(dico d);
 
+void print_prefix(dico d);
+void print_prefix(dico d , unsigned int decalage);
+
 #endif
