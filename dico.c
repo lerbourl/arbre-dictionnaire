@@ -28,13 +28,52 @@ void destroy_dico(dico * d) {
 }
 
 
-int nb_children(dico * d , char c) {
-    unsigned int res = 0 , ind = get_index(c);
+unsigned int nb_children(tree t) {
+    unsigned int res = 0;
 
     for (unsigned int k = 0; k < NB_KEYS ; k++) {
-        if (*d[ind]->children[k]) {
-            res++;
-        }
+    }
+    if (t->children[k]) {
+        res++;
     }
     return res;
+}
+
+
+unsigned int nb_nodes(dico d) {
+    unsigned int somme = 0;
+    for (unsigned int k = 0 ; k < NB_KEYS ; k++) {
+    /* Si la feuille a un fils, on incrémente somme et on explore ce fils */
+        if (d[k] != NULL) {
+            somme++;
+            somme+= nb_nodes_tree(&d[k]);
+        }
+    }
+
+    /* Condition terminale : la feuille n'a pas de fils */
+
+    // if (somme == 0) {
+    //     return 0;
+    // } Inutile car somme reste à 0 si pas de fils
+
+    return somme;
+}
+
+
+unsigned int height(dico d) {
+/* On descend jusqu'en de l'arbre puis la récursivité fait remonter
+   la hauteur maximum à chaque étage */
+    unsigned int max = 0;
+    unsigned int mem = 0;
+    for (unsigned int k = 0 ; k < NB_KEYS ; k++) {
+    /* Si la feuille a un fils, on explore ce fils */
+        if (d[k] != NULL) {
+
+            mem = nb_nodes_tree(&d[k]) + 1;
+            if (mem > max) {
+                max = mem;
+            }
+        }
+    }
+    return max;
 }

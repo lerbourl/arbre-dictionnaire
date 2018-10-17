@@ -18,7 +18,8 @@ char get_char(unsigned index);
 
 dico create_dico();
 void destroy_dico(dico * d);
-int nb_children(dico * d , char c);
-
+unsigned int nb_children(tree t);
+unsigned int nb_nodes(dico d);
+unsigned int height(dico d);
 
 #endif
