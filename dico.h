@@ -14,4 +14,11 @@ typedef struct node ** dico;
 unsigned get_index(char c);
 char get_char(unsigned index);
 
+
+
+dico create_dico();
+void destroy_dico(dico * d);
+int nb_children(dico * d , char c);
+
+
 #endif
