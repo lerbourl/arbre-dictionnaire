@@ -1,6 +1,10 @@
 #ifndef DICO_H
 #define DICO_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
 struct node {
     char first;
     bool end_of_word;
@@ -18,11 +22,22 @@ char get_char(unsigned index);
 
 dico create_dico();
 void destroy_dico(dico * d);
+
 unsigned int nb_children(tree t);
 unsigned int nb_nodes(dico d);
 unsigned int height(dico d);
 
 void print_prefix(dico d);
-void print_prefix(dico d , unsigned int decalage);
+void print_prefix_decale(dico d , unsigned int decalage);
+bool equal(dico d1 , dico d2);
+
+bool contains_iter(dico d , char * word , unsigned size);
+bool add_iter(dico d , char * word , unsigned size);
+bool remove_iter(dico d , char * word , unsigned size);
+
+bool contains_rec(dico d , char * word , unsigned size);
+bool add_rec(dico d , char * word , unsigned size);
+bool remove_rec(dico d , char * word , unsigned size);
+
 
 #endif
