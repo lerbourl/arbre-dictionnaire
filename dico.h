@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <assert.h>
 
 struct node {
     char first;
@@ -22,6 +23,7 @@ char get_char(unsigned index);
 
 dico create_dico();
 void destroy_dico(dico * d);
+void destroy_tree(tree * t);
 
 unsigned int nb_children(tree t);
 unsigned int nb_nodes(dico d);

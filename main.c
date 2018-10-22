@@ -6,23 +6,43 @@
 
 int main()
 {
-    int a , b;
-
     dico d = create_dico();
 
-    add_iter(d , "aaaa" , 4);
-    add_iter(d , "test" , 4);
-    add_iter(d , "tata" , 4);
-    add_iter(d , "tete" , 4);
-    add_iter(d , "testeur" , 7);
-    a = add_iter(d , "tester" , 6);
-    b = add_iter(d , "test" , 4);
-
-    printf("a : %d\n", a);
-    printf("b : %d\n", b);
+    add_iter(d , "abc" , 3);
+    add_iter(d , "abcde" , 5);
+    add_iter(d , "abcdf" , 5);
+    add_iter(d , "xyz" , 3);
 
     print_prefix(d);
 
+    puts("");
+    puts("retrait abcde");
+    remove_iter(d , "abcde" , 5);
+    print_prefix(d);
+
+
+    puts("");
+    puts("retrait abc");
+    remove_iter(d , "abc" , 3);
+    print_prefix(d);
+
+    puts("");
+    puts("retrait xyz");
+    remove_iter(d , "xyz" , 3);
+    print_prefix(d);
+
+    puts("");
+    puts("retrait abcdf");
+    remove_iter(d , "abcdf" , 5);
+    print_prefix(d);
+
+    puts("");
+    puts("out");
+    puts("");
+
+    print_prefix(d);
+
+    free(d);
 
     return 0;
 }
