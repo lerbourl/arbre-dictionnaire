@@ -20,7 +20,6 @@ unsigned get_index(char c);
 char get_char(unsigned index);
 
 
-
 dico create_dico();
 void destroy_dico(dico * d);
 void destroy_tree(tree * t);
