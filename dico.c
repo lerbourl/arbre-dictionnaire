@@ -23,9 +23,9 @@ dico create_dico() {
     // for(unsigned k = 0 ; k < NB_KEYS ; k++) {
     //     D[k] = calloc(1 , sizeof(*D[k]));
     // }
-    printf("taille *D[k] : %d\n", (int)sizeof(*D[0]));
-    printf("taille node : %d\n", (int)sizeof(struct node));
-    printf("taille char : %d\n", (int)sizeof(char));
+    // printf("taille *D[k] : %d\n", (int)sizeof(*D[0]));
+    // printf("taille node : %d\n", (int)sizeof(struct node));
+    // printf("taille char : %d\n", (int)sizeof(char));
     return D;
 }
 
@@ -499,4 +499,58 @@ bool remove_rec(dico d , char * word , unsigned size) {
         }
     }
     return false;
+}
+
+
+/* On explore l'arbre récursivement, si on trouve une fin de mot on incrémente
+le nomre de mots et si on trouve un fils on l'explore en rajoutant le nombre de
+mots trouvé lors de l'exploration à nb_word*/
+unsigned int nb_words(dico d) {
+    if (d == NULL) {
+        return 0;
+    }
+
+    unsigned int nb_word = 0;
+
+    for (unsigned int k = 0 ; k < NB_KEYS ; k++) {
+        if (d[k] != NULL) {
+            if (d[k]->end_of_word) {
+                nb_word++;
+            }
+            if (d[k]->children != NULL) {
+                nb_word+= nb_words(d[k]->children);
+            }
+        }
+    }
+    return nb_word;
+}
+
+
+void print_dico(dico d) {
+    char buffer[26];
+    print_dico_buff(d , 0 , buffer);
+}
+
+void print_dico_buff(dico d , unsigned int ind_buff , char * buffer) {
+
+    if (d == NULL) return;
+
+    for (unsigned int k = 0 ; k < NB_KEYS ; k++) {
+
+        if (d[k] != NULL) {
+            buffer[ind_buff] = d[k]->first;
+            ind_buff++;
+            if (d[k]->end_of_word) {
+                for (unsigned int j = 0 ; j < ind_buff ; j++) {
+                    printf("%c", buffer[j]);
+                }
+                puts("");
+            }
+            if (d[k]->children != NULL) {
+                print_dico_buff(d[k]->children , ind_buff , buffer);
+                ind_buff--;
+            }
+        }
+    }
+    return;
 }

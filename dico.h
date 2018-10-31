@@ -41,4 +41,9 @@ bool add_rec(dico d , char * word , unsigned size);
 bool remove_rec(dico d , char * word , unsigned size);
 
 
+unsigned int nb_words(dico d);
+void print_dico(dico d);
+void print_dico_buff(dico d , unsigned int ind_buff , char * buffer);
+
+
 #endif
