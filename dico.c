@@ -13,7 +13,8 @@ char get_char(unsigned index) {
     return index + 'a';
 }
 
-
+/* On alloue seulement D, les D[k] seront alloués au besoin par les fonctions add
+ce qui permet d'économiser de la mémoire*/
 dico create_dico() {
     dico D = calloc(NB_KEYS , sizeof(*D));
     // printf("taille *D : %d\n", (int)sizeof(*D));
@@ -22,8 +23,9 @@ dico create_dico() {
     // for(unsigned k = 0 ; k < NB_KEYS ; k++) {
     //     D[k] = calloc(1 , sizeof(*D[k]));
     // }
-    // printf("taille *D[k] : %d\n", (int)sizeof(*D[0]));
-    // printf("taille node : %d\n", (int)sizeof(struct node));
+    printf("taille *D[k] : %d\n", (int)sizeof(*D[0]));
+    printf("taille node : %d\n", (int)sizeof(struct node));
+    printf("taille char : %d\n", (int)sizeof(char));
     return D;
 }
 
@@ -234,8 +236,12 @@ bool contains_iter(dico d , char * word , unsigned size) {
     return true;
 }
 
-
+/* Dans toutes les fonctions d'ajout et de suppression on pourrait utiliser contains
+et se passer de tous les tests dans ces fonctions qui vérifient que le mot est
+bien présent mais cela implique de parcourir l'arbre 2 fois au lieu d'une seule fois */
 bool add_iter(dico d , char * word , unsigned size) {
+
+    if (d == NULL) return false;
 
     unsigned int ind = 0;
     dico p = d;
@@ -391,5 +397,106 @@ bool contains_rec(dico d , char * word , unsigned size) {
 }
 
 
-bool add_rec(dico d , char * word , unsigned size);
-bool remove_rec(dico d , char * word , unsigned size);
+bool add_rec(dico d , char * word , unsigned size) {
+
+    if (d == NULL) return false;
+
+    unsigned int ind = get_index(word[0]);
+
+    if (size == 1) {
+        if (d[ind] == NULL) {
+            d[ind] = calloc(1 , sizeof(struct node));
+        }
+
+        if (!d[ind]->first) {
+            d[ind]->first = word[0];
+        }
+
+        if (!d[ind]->end_of_word) {
+            d[ind]->end_of_word = true;
+            return true;
+        }
+        else return false;
+    }
+
+
+    if (d[ind] == NULL) {
+        d[ind] = calloc(1 , sizeof(struct node));
+    }
+
+    if (d[ind]->children == NULL) {
+        d[ind]->children = calloc(NB_KEYS , sizeof(dico));
+    }
+
+    if (!d[ind]->first) {
+        d[ind]->first = word[0];
+    }
+
+    return add_rec(d[ind]->children , word + 1 , size - 1);
+}
+
+
+bool remove_rec(dico d , char * word , unsigned size) {
+
+    if (d == NULL) return false;
+
+    unsigned int ind = get_index(word[0]);
+
+    if (size == 1) {
+        if (d[ind] != NULL) {
+            if (d[ind]->first == word[0]) {
+                if (d[ind]->end_of_word) {
+                    d[ind]->end_of_word = false;
+
+                    if (d[ind]->children == NULL) {
+                        destroy_tree(&d[ind]);
+                        d[ind] = NULL;
+                    }
+                    /* De manière analogue à remove iter on supprime la liaison */
+                    else {
+                        bool set_null = true;
+                        for (unsigned j = 0 ; j < NB_KEYS ; j++) {
+                            if (d[ind]->children[j] != NULL) {
+                                set_null = false;
+                            }
+                        }
+
+                        if (set_null) {
+                            destroy_tree(&d[ind]);
+                            d[ind] = NULL;
+                        }
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /* Si l'un des 3 tests suivants est faux il faut retourner faux
+     car cela signifie que le mot n'est pas présent */
+    if (d[ind] != NULL) {
+        if (d[ind]->first == word[0]) {
+            if (d[ind]->children != NULL) {
+                if (remove_rec(d[ind]->children , word + 1 , size - 1)) {
+                    if (!d[ind]->end_of_word) {
+                        bool seul_enfant = true;
+                        for (unsigned int k = 0 ; k < NB_KEYS ; k++) {
+                            if (d[ind]->children[k] != NULL && k != ind) {
+                                seul_enfant = false;
+                            }
+                        }
+
+                        if (seul_enfant) {
+                            destroy_tree(&d[ind]);
+
+                            d[ind] = NULL;
+                        }
+                    }
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}

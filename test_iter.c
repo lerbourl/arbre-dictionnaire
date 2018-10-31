@@ -24,8 +24,6 @@ void test_iter() {
 
     print_prefix(d);
 
-    return;
-
     puts("");
     puts("retrait abcde");
     remove_iter(d , "abcde" , 5);

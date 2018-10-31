@@ -9,7 +9,7 @@ CC = gcc
 # flags
 # -g ajoute les informations de debug (gdb par exemple)
 # -Wall active tous les warnings (aide à un code plus propre)
-CFLAGS = -Wall -g
+CFLAGS = -Wall -Wextra -g
 
 # librairies
 LIBS = -lm
