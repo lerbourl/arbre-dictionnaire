@@ -482,7 +482,7 @@ bool remove_rec(dico d , char * word , unsigned size) {
                     if (!d[ind]->end_of_word) {
                         bool seul_enfant = true;
                         for (unsigned int k = 0 ; k < NB_KEYS ; k++) {
-                            if (d[ind]->children[k] != NULL && k != ind) {
+                            if (d[ind]->children[k] != NULL /*&& k != ind*/) {
                                 seul_enfant = false;
                             }
                         }
