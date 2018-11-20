@@ -11,27 +11,34 @@ void test_rec() {
 
 
 
-    add_rec(d , "xyz" , 3);
-    add_rec(d , "abc" , 3);
-    add_rec(d , "abcde" , 5);
-    add_rec(d , "abcdefg" , 7);
+    // add_rec(d , "chaussure" , 9);
+    // add_rec(d , "chaussette" , 10);
+    // add_rec(d , "chausserai" , 10);
+    // add_rec(d , "chausse" , 7);
+    add_rec(d , "ordinateur" , 10);
+    // add_rec(d , "abcdjje" , 7);
+    // add_rec(d , "abcdjjuiop" , 10);
+    add_rec(d , "abcdjjazer" , 10);
+    add_rec(d , "abcdjjxyz" , 9);
+
     // add_rec(d , "adcde" , 5);
 
 
     print_prefix(d);
 
     puts("");
-    puts("Retrait de abc");
+    puts("Retrait de abcdefzxe");
     puts("");
 
     // remove_rec(d , "adcde" , 5);
     // print_prefix(d);
     // puts("");
 
-    remove_rec(d , "abcdefg" , 7);
-    remove_rec(d , "abcde" , 5);
+    remove_rec(d , "ordinateur" , 10);
     print_prefix(d);
     puts("");
+
+    return;
 
     remove_rec(d , "abc" , 3);
     print_prefix(d);
@@ -75,7 +82,7 @@ void test_rec() {
     destroy_dico(&d);
 
     puts("");
-    puts("Fin de test_iter");
+    puts("Fin de test_rec");
     puts("");
 
 

@@ -4,6 +4,9 @@
 
 unsigned get_index(char c) {
     int res = c - 'a';
+    if (res < 0 || res > 26) {
+        res = c - 'A';
+    }
     assert(res >= 0 && res < 27);
     return (unsigned)res;
 }
@@ -111,6 +114,8 @@ unsigned int height(dico d) {
        return 0;
    }
 
+   if (nb_nodes(d) == 0) return 0;
+
 
     unsigned int max = 1;
     unsigned int mem = 1;
@@ -131,17 +136,19 @@ unsigned int height(dico d) {
 
 
 
-void print_prefix(dico d) {
-    print_prefix_decale(d , 0);
+bool print_prefix(dico d) {
+    return print_prefix_decale(d , 0);
 }
 
 
-void print_prefix_decale(dico d , unsigned int decalage) {
+bool print_prefix_decale(dico d , unsigned int decalage) {
 
-    if (d == NULL) return;
+    bool affiche = false;
+    if (d == NULL) return false;
 
     for (unsigned int k = 0 ; k < NB_KEYS ; k++) {
         if (d[k] != NULL) {
+            affiche = true;
             if (d[k]->children != NULL || d[k]->end_of_word) {
 
                 for (unsigned p = 0 ; p < decalage ; p++) {
@@ -156,6 +163,7 @@ void print_prefix_decale(dico d , unsigned int decalage) {
             }
         }
     }
+    return affiche;
 }
 
 
@@ -222,7 +230,7 @@ bool contains_iter(dico d , char * word , unsigned size) {
             return false;
         }
 
-        if (p[ind]->first != word[k]) {
+        if (tolower(p[ind]->first) != tolower(word[k])) {
             return false;
         }
 
@@ -377,7 +385,7 @@ bool contains_rec(dico d , char * word , unsigned size) {
                 return false;
             }
 
-            if (d[ind]->first == word[0]) {
+            if (tolower(d[ind]->first) == tolower(word[0])) {
                 return true;
             }
         }
@@ -387,7 +395,7 @@ bool contains_rec(dico d , char * word , unsigned size) {
     c'est que le mot n'est pas présent */
     if (d[ind] != NULL) {
         if (d[ind]->children != NULL) {
-            if (d[ind]->first != word[0]) {
+            if (tolower(d[ind]->first) != tolower(word[0])) {
                 return false;
             }
             return contains_rec(d[ind]->children , word + 1 , size - 1);
@@ -502,6 +510,7 @@ bool remove_rec(dico d , char * word , unsigned size) {
 }
 
 
+
 /* On explore l'arbre récursivement, si on trouve une fin de mot on incrémente
 le nomre de mots et si on trouve un fils on l'explore en rajoutant le nombre de
 mots trouvé lors de l'exploration à nb_word*/
@@ -526,20 +535,21 @@ unsigned int nb_words(dico d) {
 }
 
 
-void print_dico(dico d) {
+bool print_dico(dico d) {
     char buffer[26];
-    print_dico_buff(d , 0 , buffer);
+    return print_dico_buff(d , 0 , buffer , false);
 }
 
-void print_dico_buff(dico d , unsigned int ind_buff , char * buffer) {
+bool print_dico_buff(dico d , unsigned int ind_buff , char * buffer , bool affiche) {
 
-    if (d == NULL) return;
+    if (d == NULL) return affiche;
 
     for (unsigned int k = 0 ; k < NB_KEYS ; k++) {
 
         if (d[k] != NULL) {
             buffer[ind_buff] = d[k]->first;
             ind_buff++;
+            affiche = true;
             if (d[k]->end_of_word) {
                 for (unsigned int j = 0 ; j < ind_buff ; j++) {
                     printf("%c", buffer[j]);
@@ -547,10 +557,50 @@ void print_dico_buff(dico d , unsigned int ind_buff , char * buffer) {
                 puts("");
             }
             if (d[k]->children != NULL) {
-                print_dico_buff(d[k]->children , ind_buff , buffer);
-                ind_buff--;
+                print_dico_buff(d[k]->children , ind_buff , buffer , true);
             }
+            ind_buff--;
         }
     }
-    return;
+    return affiche;
 }
+
+
+
+
+
+
+
+
+//
+//
+// int lireLigne(char *mot , int tailleMot , FILE *f) {
+//     int ligneValide = 1;
+//     if (fgets(mot , tailleMot , f) == 0) ligneValide = -1;
+//     else {
+//         mot[strlen(mot) - 1] = 0;
+//         for (unsigned int k = 0 ; k < strlen(mot) ; k++) {
+//             if (mot[k] < 'a' || mot[k] > 'z') {
+//                 ligneValide = 0;
+//             }
+//         }
+//     }
+//     return ligneValide;
+// }
+//
+// void chargerMots(char *nomFichier , dico d) {
+//
+//     printf("nom fichier %s\n", nomFichier);
+//     FILE *f = fopen(nomFichier , "rt");
+//     if (f == NULL) {printf("Impossible d'ouvrir le fichier\n"); return;}
+//     char mot[64];
+//     int taille = 64;
+//     int res;
+//     do {
+//         res = lireLigne(mot , taille , f);
+//         if (res == 1) {
+//             add_iter(d , mot , strlen(mot));
+//         }
+//     } while(res != -1);
+//     return;
+// }
