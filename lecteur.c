@@ -6,7 +6,7 @@ int lireLigne(char *mot , int tailleMot , FILE *f) {
     else {
         mot[strlen(mot) - 1] = 0;
         for (unsigned int k = 0 ; k < strlen(mot) ; k++) {
-            if (mot[k] < 'a' || mot[k] > 'z') {
+            if (!((mot[k] >= 'a' && mot[k] <= 'z') || (mot[k] >= 'A' && mot[k] <= 'Z'))) {
                 ligneValide = 0;
             }
         }
@@ -16,7 +16,19 @@ int lireLigne(char *mot , int tailleMot , FILE *f) {
 
 void chargerMotsDansDico(char *nomDico , dico d) {
 
-    FILE *f = fopen(nomDico , "rt");
+    FILE *f = NULL;
+
+    if (nomDico[0] != '.') {
+        char nomFichier[128] = {"./dictionnaire/"};
+        strcat(nomFichier , nomDico);
+        f = fopen(nomFichier , "rt");
+    }
+    else {
+        f = fopen(nomDico , "rt");
+    }
+
+
+
     if (f == NULL) {printf("Impossible d'ouvrir le fichier\n"); return;}
     char mot[64];
     int taille = 64;

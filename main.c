@@ -10,13 +10,17 @@
 #include "test_5-6.h"
 #include "test_generique.h"
 
-/* Le paramètre mode permet d'alternet entre le choix de lettres ou de chiffres */
+/* Le paramètre mode permet d'alterner entre le choix de lettres ou de chiffres en précisant 'a' ou '0' */
 int getRep(int borneInf , int borneSup , char *message , int mode) {
 
     int rep = 0;
     char c[8];
+    bool erreur = false;
 
     do {
+        if (erreur) {
+            printf("Donner un nombre entre %d et %d\n\n", borneInf , borneSup);
+        }
         rep = 0;
         printf("%s", message);
         fgets(c , 7 , stdin);
@@ -24,6 +28,7 @@ int getRep(int borneInf , int borneSup , char *message , int mode) {
             rep = rep * 10 + c[k] - mode;
             // c[k] = '0';
         }
+        erreur = true;
     } while(rep < borneInf || rep > borneSup);
     return rep;
 }
@@ -207,21 +212,60 @@ int main(int argc , char *argv[])
 
 
             case 9:
-                puts("Liste des dictionnaires disponibles");
-                system("ls -sh ./dictionnaire/");
-                puts("Pour voir son contenu, donner son numéro (on commence à 1 et 0 pour ignorer)");
-                choix = getRep(0 , 3 , NULL , '0');
-                if (choix == 1) {
-                    sytem("cat dico1.txt");
+
+                system("ls -l ./dictionnaire/ | wc -l > nbFichier.txt");
+                FILE * f1 = fopen("nbFichier.txt" , "rt");
+                int nbFichier = 0;
+                if (f1 == NULL) {
+                    printf("Impossible d'ouvrir le fichier\n");
+                    exit(EXIT_FAILURE);
                 }
 
-                if (choix == 2) {
-                    sytem("cat dico2.txt");
+                if (fscanf(f1, "%d" , &nbFichier) == 0) {
+                    printf("Erreur de lecture\n");
+                    exit(EXIT_FAILURE);
                 }
 
-                if (choix == 3) {
-                    sytem("cat test.txt");
-                }
+
+                fclose(f1);
+                system("rm nbFichier.txt");
+
+                system("ls ./dictionnaire/ > .nomDico");
+                FILE *f2 = fopen(".nomDico" , "rt");
+                char nomDico[64];
+
+                do {
+                    rewind(f2);
+                    printf("\nListe des dictionnaires disponibles :\n");
+                    system("ls -lsh ./dictionnaire/");
+                    choix = getRep(0 , nbFichier - 2 , "\nPour sélectionner un dictionnaire, donner son numéro (on commence à 0)\n" , '0');
+
+                    for (unsigned int k = 0 ; k <= choix ; k++) {
+                        fscanf(f2 , "%s" , nomDico);
+                    }
+
+                    printf("Vous avez sélectionné %s\n", nomDico);
+                    choix = getRep(0 , 2 , "\n0 -> Voir son contenu\n1 -> Choisir un autre fichier\n2 -> Charger ce fichier dans le dictionnaire\n" , '0');
+
+
+                    if (choix == 0) {
+                        char commande[128] = {"cat ./dictionnaire/"};
+                        strcat(commande , nomDico);
+                        puts("");
+
+                        system(commande);
+
+                        choix = getRep(0 , 1 , "\n0 -> Choisir un autre fichier\n1 -> Charger ce fichier dans le dictionnaire\n" , '0');
+                        choix++;
+                    }
+
+                } while(choix != 2);
+
+                fclose(f2);
+                system("rm .nomDico");
+
+                // nomDico[strlen(nomDico)] = '\0';
+                chargerMotsDansDico(nomDico , d);
 
             break;
 
@@ -230,35 +274,6 @@ int main(int argc , char *argv[])
 
 
 
-        //
-        // int errno = 0;
-        // n = scanf("%m[1-9]", &p);
-        // if (n == 1) {
-        //     printf("read: %s\n", p);
-        //     free(p);
-        // } else if (errno != 0) {
-        //     perror("scanf");
-        // } else {
-        //     fprintf(stderr, "No matching characters\n");
-        //     exit(EXIT_FAILURE);
-        // }
-        //
-        //
-        //
-        // printf("0 -> Quittez\n");
-        // printf("1 -> Continuer\n");
-        //
-        // n = scanf("%m[0-1]", &rep);
-        // if (n == 1) {
-        //     printf("read: %s\n", rep);
-        //     free(p);
-        // } else if (errno != 0) {
-        //     perror("scanf");
-        // } else {
-        //     printf("read: %s\n", rep);
-        //     fprintf(stderr, "No matching characters\n");
-        //     exit(EXIT_FAILURE);
-        // }
 
 
 
