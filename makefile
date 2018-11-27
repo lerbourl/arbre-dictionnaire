@@ -31,6 +31,8 @@ all:	$(EXC)
 bin: $(OBJS)
 		$(CC) -o $@ $^ $(LIBS)
 
+#testiterateur: $(CC) $(CFLAGS) dico.c iterateur.c lecteur.c -o $@
+
 %.o: %.c
 		$(CC) -o $@ -c $< $(CFLAGS)
 

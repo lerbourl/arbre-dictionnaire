@@ -9,11 +9,11 @@ iterator * start_iterator(dico d){
     dit->word = calloc(height(d), sizeof(char));
     dit->stack = calloc(nb_nodes(d), sizeof(struct iterator_info));
     dit->index_stack = 0;
-    for (i = 0; i < NB_KEYS, i++){
+    for (i = 0; i < NB_KEYS; i++){
         if (d[i] != NULL){ // il y a un arbre, on empile
-            dit->stack[index_stack].t = d[i];
-            dit->stack[index_stack].index_word = 0;
-            index_stack++;
+            dit->stack[dit->index_stack].t = d[i];
+            dit->stack[dit->index_stack].index_word = 0;
+            dit->index_stack++;
         }
     }
     return dit;
