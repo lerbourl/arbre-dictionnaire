@@ -24,5 +24,6 @@ iterator * start_iterator(dico d);
 void destroy_iterator(iterator ** it);
 bool has_next(iterator * it);
 char * next (iterator * it);
+void empile_fils(iterator* dit, dico d, int iw);
 
 #endif

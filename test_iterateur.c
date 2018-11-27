@@ -6,10 +6,10 @@
 
 int main(){
     dico d = create_dico();
-    chargerMotsDansDico("./dictionnaire/pokemon1.txt" , d);
-    print_dico(d);
+    chargerMotsDansDico("./dictionnaire/pokemon2.txt" , d);
     iterator * dit = start_iterator(d);
-    //while (has_next(dit)) printf("-%s", next(dit));
+    while (has_next(dit)) printf("-%s\n", next(dit));
     destroy_iterator(&dit);
+    destroy_dico(&d);
     return 0;
 }
