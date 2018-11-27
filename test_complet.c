@@ -116,9 +116,14 @@ void test_complet() {
     fgets(c , 64 , stdin);
 
 
-
     clrscr();
 
+
+
+
+
+
+/**************** FONCTIONS RECURSIVES ****************/
 
     printf("Test des fonctions récursives :\n");
     fgets(c , 64 , stdin);
@@ -168,51 +173,155 @@ void test_complet() {
     print_dico(d);
     printf("\nOn va maintenant supprimer tous les mots un par un\n");
 
-    printf("Retrait de Dracaufeu\n")
+    printf("Retrait de Dracaufeu\n");
     remove_rec(d , "Dracaufeu" , strlen("Dracaufeu"));
     print_dico(d);
 
-    printf("Retrait de Draco\n")
+    printf("Retrait de Draco\n");
     remove_rec(d , "Draco" , strlen("Draco"));
     print_dico(d);
 
-    printf("Retrait de Dracolosse\n")
+    printf("Retrait de Dracolosse\n");
     remove_rec(d , "Dracolosse" , strlen("Dracolosse"));
     print_dico(d);
 
-    printf("Retrait de Mew\n")
+    printf("Retrait de Mew\n");
     remove_rec(d , "Mew" , strlen("Mew"));
     print_dico(d);
 
-    printf("Retrait de Mewtwo\n")
+    printf("Retrait de Mewtwo\n");
     remove_rec(d , "Mewtwo" , strlen("Mewtwo"));
     print_dico(d);
 
-    printf("Retrait de Minidraco\n")
+    printf("Retrait de Minidraco\n");
     remove_rec(d , "Minidraco" , strlen("Minidraco"));
     print_dico(d);
 
-    printf("Retrait de Nidorina\n")
+    printf("Retrait de Nidorina\n");
     remove_rec(d , "Nidorina" , strlen("Nidorina"));
     print_dico(d);
 
-    printf("Retrait de Nidorino\n")
+    printf("Retrait de Nidorino\n");
     remove_rec(d , "Nidorino" , strlen("Nidorino"));
     print_dico(d);
 
-    printf("Retrait de Nidoking\n")
+    printf("Retrait de Nidoking\n");
     remove_rec(d , "Nidoking" , strlen("Nidoking"));
     print_dico(d);
 
-    printf("Retrait de Nidoqueen\n")
+    printf("Retrait de Nidoqueen\n");
     remove_rec(d , "Nidoqueen" , strlen("Nidoqueen"));
     print_dico(d);
 
-    printf("Retrait de Pikachu\n")
+    printf("Retrait de Pikachu\n");
     remove_rec(d , "Pikachu" , strlen("Pikachu"));
     print_dico(d);
 
 
+    clrscr();
+
+
+
+
+/**************** FONCTIONS ITERATIVES ****************/
+    printf("Test des fonctions itératives :\n");
+    fgets(c , 64 , stdin);
+
+    printf("On recharge le fichier d'origine\n");
+    chargerMotsDansDico("pokemon1.txt" , d);
+    print_dico(d);
+    fgets(c , 64 , stdin);
+
+
+    clrscr();
+    printf("On va ajouter Pikachu\n");
+    fgets(c , 64 , stdin);
+    add_iter(d , "Pikachu" , strlen("Pikachu"));
+    print_prefix(d);
+    fgets(c , 64 , stdin);
+    clrscr();
+
+    printf("On va ajouter Nidorina\n");
+    fgets(c , 64 , stdin);
+    add_iter(d , "Nidorina" , strlen("Nidorina"));
+    print_prefix(d);
+    fgets(c , 64 , stdin);
+    clrscr();
+
+    printf("On va ajouter Nidorino\n");
+    fgets(c , 64 , stdin);
+    add_iter(d , "Nidorino" , strlen("Nidorino"));
+    print_prefix(d);
+    fgets(c , 64 , stdin);
+    clrscr();
+
+    printf("On va essayer d'ajouter Mew\n");
+    fgets(c , 64 , stdin);
+    add_iter(d , "Mew" , strlen("Mew"));
+    print_prefix(d);
+    printf("\nIl n'y a eu aucune modification\n");
+    fgets(c , 64 , stdin);
+    clrscr();
+
+    printf("Test de la fonction contains\n\n");
+
+    printf("Est ce que Mew est dans le dico ? %d\n", contains_iter(d , "Mew" , strlen("Mew")));
+    printf("Est ce que Mewtwo est dans le dico ? %d\n", contains_iter(d , "Mewtwo" , strlen("Mewtwo")));
+    printf("Est ce que Mewt est dans le dico ? %d\n", contains_iter(d , "Mewt" , strlen("Mewt")));
+    printf("Est ce que Raichu est dans le dico ? %d\n", contains_iter(d , "Raichu" , strlen("Raichu")));
+    printf("Est ce que Nido est dans le dico ? %d\n", contains_iter(d , "Nido" , strlen("Nido")));
+    printf("Est ce que plusdedixlettres est dans le dico ? %d\n", contains_iter(d , "plusdedixlettres" , strlen("plusdedixlettres")));
+
+    fgets(c , 64 , stdin);
+    clrscr();
+
+    printf("Le dico contient actuellement :\n");
+    print_dico(d);
+    printf("\nOn va maintenant supprimer tous les mots un par un\n");
+
+    printf("Retrait de Dracaufeu\n");
+    remove_iter(d , "Dracaufeu" , strlen("Dracaufeu"));
+    print_dico(d);
+
+    printf("Retrait de Draco\n");
+    remove_iter(d , "Draco" , strlen("Draco"));
+    print_dico(d);
+
+    printf("Retrait de Dracolosse\n");
+    remove_iter(d , "Dracolosse" , strlen("Dracolosse"));
+    print_dico(d);
+
+    printf("Retrait de Mew\n");
+    remove_iter(d , "Mew" , strlen("Mew"));
+    print_dico(d);
+
+    printf("Retrait de Mewtwo\n");
+    remove_iter(d , "Mewtwo" , strlen("Mewtwo"));
+    print_dico(d);
+
+    printf("Retrait de Minidraco\n");
+    remove_iter(d , "Minidraco" , strlen("Minidraco"));
+    print_dico(d);
+
+    printf("Retrait de Nidorina\n");
+    remove_iter(d , "Nidorina" , strlen("Nidorina"));
+    print_dico(d);
+
+    printf("Retrait de Nidorino\n");
+    remove_iter(d , "Nidorino" , strlen("Nidorino"));
+    print_dico(d);
+
+    printf("Retrait de Nidoking\n");
+    remove_iter(d , "Nidoking" , strlen("Nidoking"));
+    print_dico(d);
+
+    printf("Retrait de Nidoqueen\n");
+    remove_iter(d , "Nidoqueen" , strlen("Nidoqueen"));
+    print_dico(d);
+
+    printf("Retrait de Pikachu\n");
+    remove_iter(d , "Pikachu" , strlen("Pikachu"));
+    print_dico(d);
 
 
 

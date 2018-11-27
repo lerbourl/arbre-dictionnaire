@@ -536,7 +536,7 @@ unsigned int nb_words(dico d) {
 
 
 bool print_dico(dico d) {
-    char buffer[26];
+    char buffer[64];
     return print_dico_buff(d , 0 , buffer , false);
 }
 
