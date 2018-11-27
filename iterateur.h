@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#include "dico.h"
+
 struct iterator_info {
     tree t;
     int index_word;

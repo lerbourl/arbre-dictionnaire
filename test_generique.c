@@ -10,7 +10,7 @@ void test_generique(char *nomDico , char *nomFichier) {
         remove_rec(d , mot[0] , strlen(mot[0]));
         remove_rec(d , mot[1] , strlen(mot[1]));
 
-        ChargeDicoDansFichier(d);
+        chargeDicoDansFichier(d , "res");
         // print_dico(d);
 
         creerDicoSansAccent(nomDico , nomFichier);

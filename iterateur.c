@@ -1,4 +1,3 @@
-#include "dico.h"
 #include "iterateur.h"
 
 iterator * start_iterator(dico d){

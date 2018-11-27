@@ -6,7 +6,7 @@ int lireLigne(char *mot , int tailleMot , FILE *f) {
     else {
         mot[strlen(mot) - 1] = 0;
         for (unsigned int k = 0 ; k < strlen(mot) ; k++) {
-            if (!((mot[k] >= 'a' && mot[k] <= 'z') || (mot[k] >= 'A' && mot[k] <= 'Z'))) {
+            if (!((mot[k] >= 'a' && mot[k] <= 'z') || (mot[k] >= 'A' && mot[k] <= 'Z') )) {
                 ligneValide = 0;
             }
         }
@@ -33,10 +33,18 @@ void chargerMotsDansDico(char *nomDico , dico d) {
     char mot[64];
     int taille = 64;
     int res;
+    int alea;
     do {
         res = lireLigne(mot , taille , f);
         if (res == 1) {
-            add_iter(d , mot , strlen(mot));
+            srand(time(NULL));
+            alea = rand() % 2;
+            if (alea == 0) {
+                add_iter(d , mot , strlen(mot));
+            }
+            else {
+                add_rec(d , mot , strlen(mot));
+            }
         }
     } while(res != -1);
 
@@ -45,14 +53,14 @@ void chargerMotsDansDico(char *nomDico , dico d) {
 }
 
 
-void ChargeDicoDansFichier(dico d) {
-    FILE *f = fopen("res", "wt");
+void chargeDicoDansFichier(dico d , char * nomFichier) {
+    FILE *f = fopen(nomFichier , "wt");
     char buffer[26];
-    ChargeDico_buff(d , 0 , buffer , f);
+    chargeDico_buff(d , 0 , buffer , f);
     fclose(f);
 }
 
-void ChargeDico_buff(dico d , unsigned int ind_buff , char * buffer , FILE *f) {
+void chargeDico_buff(dico d , unsigned int ind_buff , char * buffer , FILE *f) {
 
     if (d == NULL) return;
 
@@ -74,7 +82,7 @@ void ChargeDico_buff(dico d , unsigned int ind_buff , char * buffer , FILE *f) {
                 mot = NULL;
             }
             if (d[k]->children != NULL) {
-                ChargeDico_buff(d[k]->children , ind_buff , buffer , f);
+                chargeDico_buff(d[k]->children , ind_buff , buffer , f);
             }
             ind_buff--;
         }
