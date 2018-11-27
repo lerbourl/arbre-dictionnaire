@@ -9,6 +9,7 @@
 #include "test_rec.h"
 #include "test_5-6.h"
 #include "test_generique.h"
+#include "test_complet.h"
 
 /* Le paramètre mode permet d'alterner entre le choix de lettres ou de chiffres en précisant 'a' ou '0' */
 int getRep(int borneInf , int borneSup , char *message , int mode) {
@@ -44,7 +45,7 @@ int main(int argc , char *argv[])
 
 
     // system("cat dico.h");
-    char c[8];
+    char c[64];
     char mot[64];
     int rep = 1;
     unsigned int choix = 0;
@@ -77,16 +78,22 @@ int main(int argc , char *argv[])
             printf("\t7 -> Connaitre le nombre de noeuds\n");
             printf("\t8 -> Connaitre la hauteur du dictionnaire\n");
             printf("\t9 -> Charger un fichier contenant des mots\n");
+            printf("\t10 -> Lancer des tests automatiquement\n");
 
-
-            fgets(c , 7 , stdin);
+            fgets(c , 64 , stdin);
             rep = 0;
-            for (unsigned int k = 0 ; k < strlen(c)-1 ; k++) {
-                rep = rep * 10 + c[k] - 48;
-                c[k] = '0';
+
+            if (c[0] == '\n') {
+                rep = -1;
+            }
+            else {
+                for (unsigned int k = 0 ; k < strlen(c)-1 ; k++) {
+                    rep = rep * 10 + c[k] - 48;
+                    c[k] = '0';
+                }
             }
             // printf("rep : %d\n", rep);
-        } while(rep < 0 || rep > 9);
+        } while(rep < 0 || rep > 10);
 
         switch (rep) {
 
@@ -269,6 +276,12 @@ int main(int argc , char *argv[])
 
             break;
 
+
+            case 10:
+
+                test_complet();
+
+            break;
         }
 
 
