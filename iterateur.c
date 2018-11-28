@@ -5,9 +5,9 @@ iterator * start_iterator(dico d){
         return NULL;
     }
     iterator* dit = calloc(1, sizeof(iterator));
-    dit->word = calloc(height(d), sizeof(char));
+    dit->word = calloc(height(d) + 1, sizeof(char));
     dit->stack = calloc(nb_nodes(d), sizeof(struct iterator_info));
-    dit->index_stack = -1;
+    dit->index_stack = 0;
     empile_fils(dit, d, 0);
     return dit;
 }
