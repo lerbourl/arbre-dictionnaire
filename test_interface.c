@@ -35,7 +35,7 @@ int getRep(int borneInf , int borneSup , char *message , int mode) {
 }
 
 
-int main(int argc , char *argv[])
+int main()
 {
 
 
@@ -64,7 +64,7 @@ int main(int argc , char *argv[])
         puts("Que voulez-vous faire ?");
 
         do {
-            if (rep < 0 || rep > 10) {
+            if (rep < 0 || rep > 9) {
                 printf("Erreur de sélection\n\n\n");
             }
             printf("\t0 -> Quitter\n\n");
@@ -78,7 +78,6 @@ int main(int argc , char *argv[])
             printf("\t7 -> Connaitre le nombre de noeuds\n");
             printf("\t8 -> Connaitre la hauteur du dictionnaire\n");
             printf("\t9 -> Charger un fichier contenant des mots\n");
-            printf("\t10 -> Lancer des tests automatiquement\n");
 
             fgets(c , 64 , stdin);
             rep = 0;
@@ -105,14 +104,10 @@ int main(int argc , char *argv[])
                 choix = getRep(1 , 2 , "\nComment afficher le dictionnaire ?\n\t1 -> print_prefix\n\t2 -> print_dico\n" , '0');
                 puts("");
                 if (choix == 1) {
-                    if (!print_prefix(d)) {
-                        puts("Le dictionnaire est vide");
-                    }
+                    print_dico(d);
                 }
                 else if (choix == 2) {
-                    if (!print_dico(d)) {
-                        puts("Le dictionnaire est vide");
-                    }
+                    print_dico(d);
                 }
                 else {
                     puts("Erreur de choix");
@@ -276,35 +271,10 @@ int main(int argc , char *argv[])
 
             break;
 
-
-            case 10:
-
-                // test_complet();
-
-            break;
         }
-
-
-
-
-
-
-
     } while(rep);
-
 
     destroy_dico(&d);
 
     return 0;
-
-    // if (argc != 3) {
-	// fprintf(stderr, "Usage: %s FileInpit FileOutput\n", argv[0]);
-	// exit(EXIT_FAILURE);
-    // }
-    // test_basique();
-    // test_iter();
-    // test_rec();
-    // test_5_6();
-    // test_generique(argv[1] , argv[2]);
-    // return 0;
 }

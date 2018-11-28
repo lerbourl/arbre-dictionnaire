@@ -1,0 +1,10 @@
+Pour compiler, lancer la commande make ce qui va générer les exécutables.
+Il suffit ensuite de choisir lequel lancer.
+Chaque exécutable correspond aux tests des fonctions d'une sous-partie sauf un qui test toutes les fonctions à l'exception de equal.
+Le test de la fonction equal se situe dans l'exécutable basique
+
+
+Pour le test complet, il est possible de charger automatiquement un fichier contenant des mots dans une structure de dictionnaire.
+Pour cela, il faut juste placer le fichier dans le dossier dictionnaire.
+Lors du lancement de l'interface il suffit de sélectionner l'option 9 et de se laisser guider.
+Les fonctions gérant le chargement d'un fichier texte sont dans lecteur.c
