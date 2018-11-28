@@ -1,7 +1,13 @@
-#include "test_complet.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "dico.h"
+#include "lecteur.h"
+
+#define clrscr() printf("\033[H\033[2J")
 
 
-void test_complet() {
+int main() {
 
     char c[64];
     int nb;
@@ -328,4 +334,5 @@ void test_complet() {
 
     system("rm monDico");
     destroy_dico(&d);
+    return 0;
 }

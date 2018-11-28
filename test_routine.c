@@ -1,14 +1,12 @@
-#include "test_5-6.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#include "dico.h"
 
 
-void test_5_6() {
-    puts("");
-    puts("Début de test_5_6");
-    puts("");
-
+int main() {
     dico d = create_dico();
-
-
 
     add_rec(d , "ours" , 4);
     add_rec(d , "ourson" , 6);
@@ -19,19 +17,11 @@ void test_5_6() {
     add_rec(d , "bordeau" , 7);
     add_rec(d , "bateau" , 6);
 
-
     print_prefix(d);
 
-
-    puts("");
-    printf("nombre de mots dans l'arbre : %d\n",nb_words(d));
-    puts("");
+    printf("\nNombre de mots dans l'arbre : %d\n\n",nb_words(d));
 
     print_dico(d);
 
-
-    puts("");
-    puts("Fin de test_5_6");
-    puts("");
-
+    return 0;
 }

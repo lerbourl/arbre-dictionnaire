@@ -136,8 +136,11 @@ unsigned int height(dico d) {
 
 
 
-bool print_prefix(dico d) {
-    return print_prefix_decale(d , 0);
+void print_prefix(dico d) {
+    if (!print_prefix_decale(d , 0)) {
+        printf("Le dictionnaire est vide\n");
+        return;
+    }
 }
 
 
@@ -535,9 +538,11 @@ unsigned int nb_words(dico d) {
 }
 
 
-bool print_dico(dico d) {
+void print_dico(dico d) {
     char buffer[64];
-    return print_dico_buff(d , 0 , buffer , false);
+    if (!print_dico_buff(d , 0 , buffer , false)) {
+        printf("Le dictionnaire est vide\n");
+    }
 }
 
 bool print_dico_buff(dico d , unsigned int ind_buff , char * buffer , bool affiche) {

@@ -30,7 +30,7 @@ unsigned int nb_children(tree t);
 unsigned int nb_nodes(dico d);
 unsigned int height(dico d);
 
-bool print_prefix(dico d);
+void print_prefix(dico d);
 bool print_prefix_decale(dico d , unsigned int decalage);
 bool equal(dico d1 , dico d2);
 
@@ -44,7 +44,7 @@ bool remove_rec(dico d , char * word , unsigned size);
 
 
 unsigned int nb_words(dico d);
-bool print_dico(dico d);
+void print_dico(dico d);
 bool print_dico_buff(dico d , unsigned int ind_buff , char * buffer , bool affiche);
 
 // int lireLigne(char *mot , int tailleMot , FILE *f);

@@ -1,40 +1,44 @@
-#
-# Makefile du projet
+CC=gcc
+RM=rm -f
 
-#
-# definition de variables
-# le compilateur
-CC = gcc
+CFLAGS=-g -Wall -Wextra -I.
 
-# flags
-# -g ajoute les informations de debug (gdb par exemple)
-# -Wall active tous les warnings (aide à un code plus propre)
-CFLAGS = -Wall -Wextra -g
+EXEC=basique complet interface iterateur iteratif recursif routine
+OBJ=dico.o iterateur.o lecteur.o
 
-# librairies
-LIBS = -lm
+all: $(EXEC)
 
-# les sources C
-SRCS = *.c
+# %.out : %.c $(OBJ)
+# 	$(CC) $< $(OBJ) -o $@
 
-# les objets C
-OBJS = $(SRCS:.c=.o)
+basique : test_basique.c $(OBJ)
+	$(CC) $< $(OBJ) -o $@
 
-# l'executable
-EXC = bin
+complet : test_complet.c $(OBJ)
+	$(CC) $< $(OBJ) -o $@
 
-#
-# build generique
-all:	$(EXC)
-		@echo executable est compilé avec succès!!
+interface : test_interface.c $(OBJ)
+	$(CC) $< $(OBJ) -o $@
 
-bin: $(OBJS)
-		$(CC) -o $@ $^ $(LIBS)
+iterateur: test_iterateur.c $(OBJ)
+	$(CC) $< $(OBJ) -o $@
 
-#testiterateur: $(CC) $(CFLAGS) dico.c iterateur.c lecteur.c -o $@
+iteratif: test_iteratif.c $(OBJ)
+	$(CC) $< $(OBJ) -o $@
+
+recursif: test_recursif.c $(OBJ)
+	$(CC) $< $(OBJ) -o $@
+
+routine : test_routine.c $(OBJ)
+	$(CC) $< $(OBJ) -o $@
+
 
 %.o: %.c
-		$(CC) -o $@ -c $< $(CFLAGS)
+	$(CC) $(CFLAGS) $< -c
 
-clean:
-		$(RM) *.o *~ $(EXC)
+
+clean :
+	$(RM) *.o *~
+
+mrpropre :
+	$(RM) *.o *~ $(EXEC)

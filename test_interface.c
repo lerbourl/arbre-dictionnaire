@@ -4,12 +4,12 @@
 
 #include "dico.h"
 #include "lecteur.h"
-#include "test_basique.h"
-#include "test_iter.h"
-#include "test_rec.h"
-#include "test_5-6.h"
-#include "test_generique.h"
-#include "test_complet.h"
+// #include "test_basique.h"
+// #include "test_iter.h"
+// #include "test_rec.h"
+// #include "test_5-6.h"
+// #include "test_generique.h"
+// #include "test_complet.h"
 
 /* Le paramètre mode permet d'alterner entre le choix de lettres ou de chiffres en précisant 'a' ou '0' */
 int getRep(int borneInf , int borneSup , char *message , int mode) {
@@ -64,7 +64,7 @@ int main(int argc , char *argv[])
         puts("Que voulez-vous faire ?");
 
         do {
-            if (rep < 0 || rep > 9) {
+            if (rep < 0 || rep > 10) {
                 printf("Erreur de sélection\n\n\n");
             }
             printf("\t0 -> Quitter\n\n");
@@ -279,7 +279,7 @@ int main(int argc , char *argv[])
 
             case 10:
 
-                test_complet();
+                // test_complet();
 
             break;
         }
