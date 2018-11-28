@@ -14,25 +14,25 @@ all: $(EXEC)
 # 	$(CC) $< $(OBJ) -o $@
 
 basique : test_basique.c $(OBJ)
-	$(CC) $< $(OBJ) -o $@
+	$(CC) $(CFLAGS) $< $(OBJ) -o $@
 
 complet : test_complet.c $(OBJ)
-	$(CC) $< $(OBJ) -o $@
+	$(CC) $(CFLAGS) $< $(OBJ) -o $@
 
 interface : test_interface.c $(OBJ)
-	$(CC) $< $(OBJ) -o $@
+	$(CC) $(CFLAGS) $< $(OBJ) -o $@
 
 iterateur: test_iterateur.c $(OBJ)
-	$(CC) $< $(OBJ) -o $@
+	$(CC) $(CFLAGS) $< $(OBJ) -o $@
 
 iteratif: test_iteratif.c $(OBJ)
-	$(CC) $< $(OBJ) -o $@
+	$(CC) $(CFLAGS) $< $(OBJ) -o $@
 
 recursif: test_recursif.c $(OBJ)
-	$(CC) $< $(OBJ) -o $@
+	$(CC) $(CFLAGS) $< $(OBJ) -o $@
 
 routine : test_routine.c $(OBJ)
-	$(CC) $< $(OBJ) -o $@
+	$(CC) $(CFLAGS) $< $(OBJ) -o $@
 
 
 %.o: %.c

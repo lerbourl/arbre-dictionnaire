@@ -4,12 +4,6 @@
 
 #include "dico.h"
 #include "lecteur.h"
-// #include "test_basique.h"
-// #include "test_iter.h"
-// #include "test_rec.h"
-// #include "test_5-6.h"
-// #include "test_generique.h"
-// #include "test_complet.h"
 
 /* Le paramètre mode permet d'alterner entre le choix de lettres ou de chiffres en précisant 'a' ou '0' */
 int getRep(int borneInf , int borneSup , char *message , int mode) {
@@ -62,6 +56,7 @@ int main()
 
         puts("");
         puts("Que voulez-vous faire ?");
+	$(CC) $< $(OBJ) -o $@
 
         do {
             if (rep < 0 || rep > 9) {
@@ -70,7 +65,8 @@ int main()
             printf("\t0 -> Quitter\n\n");
             printf("\t1 -> Afficher le dictionnaire\n");
             printf("\t2 -> Ajouter un mot\n");
-            printf("\t3 -> Supprimer un mot\n");
+            printf("\t3 -> Su	$(CC) $< $(OBJ) -o $@
+pprimer un mot\n");
             printf("\t4 -> Tester si un mot est présent\n\n");
 
             printf("\t5 -> Connaitre le nombre de mots\n");
