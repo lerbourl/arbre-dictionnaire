@@ -1,9 +1,11 @@
 CC=gcc
 RM=rm -f
 
-CFLAGS=-g -Wall -Wextra -I.
+CFLAGS=-g -Wall -Wextra -std=c99
 
 EXEC=basique complet interface iterateur iteratif recursif routine
+
+#SRC=dico.c iterateur.c lecteur.c
 OBJ=dico.o iterateur.o lecteur.o
 
 all: $(EXEC)

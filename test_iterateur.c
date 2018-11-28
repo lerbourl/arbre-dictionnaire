@@ -7,7 +7,7 @@
 int main(){
     dico d = create_dico();
 
-    chargerMotsDansDico("./dictionnaire/pokemon1.txt" , d);
+    chargerMotsDansDico("./dictionnaire/pokemon2.txt" , d);
     print_dico(d);
     puts("");
 
